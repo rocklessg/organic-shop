@@ -6,13 +6,7 @@ import BootstrapNavbarComponent from './bootstrap-navbar/bootstrap-navbar.compon
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, BootstrapNavbarComponent],
-  // templateUrl: './app.component.html',
-  template: `<section>
-                  <app-bootstrap-navbar></app-bootstrap-navbar>
-             </section>
-              
-                
-             `,
+  templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
