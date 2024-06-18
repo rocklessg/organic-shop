@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'bootstrap-navbar',
   standalone: true,
-  imports: [],
+  imports: [NgbDropdownModule],
   templateUrl: './bootstrap-navbar.component.html',
   styleUrl: './bootstrap-navbar.component.css'
 })
