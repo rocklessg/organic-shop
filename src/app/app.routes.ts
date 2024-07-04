@@ -5,6 +5,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { LoginComponent } from './login/login.component';
+import { CheckOutComponent } from './check-out/check-out.component';
 
 const routeConfig: Routes = [
     {
@@ -36,6 +37,11 @@ const routeConfig: Routes = [
         path: 'login',
         component: LoginComponent,
         title: 'Login',
+    },
+    {
+        path: 'check-out',
+        component: CheckOutComponent,
+        title: 'Checkout',
     }
 ];
 
