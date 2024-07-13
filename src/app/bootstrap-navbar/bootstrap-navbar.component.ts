@@ -13,9 +13,9 @@ import { AuthService } from '../auth.service';
 class BootstrapNavbarComponent implements OnInit { 
   constructor(public auth: AuthService) { }
 
-  logUser(event: Event) {
-    this.auth.logUser(event);
-  }
+  // logUser(event: Event) {
+  //   this.auth.logUser(event);
+  // }
   logout() {
     this.auth.logout();
   }
