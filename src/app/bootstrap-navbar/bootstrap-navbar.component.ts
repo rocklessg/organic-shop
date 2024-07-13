@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'bootstrap-navbar',
@@ -10,25 +10,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './bootstrap-navbar.component.html',
   styleUrl: './bootstrap-navbar.component.css'
 })
-class BootstrapNavbarComponent implements OnInit {
-  private auth: Auth = inject(Auth);
- // user = this.auth.currentUser;   
-  user: User | null = null; 
+class BootstrapNavbarComponent implements OnInit { 
+  constructor(public auth: AuthService) { }
 
-  constructor() { 
-    // Listen for authentication state changes
-    onAuthStateChanged(this.auth, (user) => {
-      this.user = user;
-    });
+  logUser(event: Event) {
+    this.auth.logUser(event);
   }
-
-  // logUser(event: Event) {
-  //   event.preventDefault(); // Prevent the default action
-  //   console.log(`UserObj is the one: ${this.user?.displayName} None`);
-  // } 
-  
   logout() {
-    this.auth.signOut();
+    this.auth.logout();
   }
   ngOnInit(): void {
     

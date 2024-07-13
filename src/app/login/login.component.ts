@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Auth, signInWithRedirect, GoogleAuthProvider } from '@angular/fire/auth';
+import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +9,10 @@ import { Auth, signInWithRedirect, GoogleAuthProvider } from '@angular/fire/auth
 })
 export class LoginComponent {
 
-  private auth: Auth = inject(Auth);
-  constructor() { }
+  constructor(private auth: AuthService) { }
   
   login() {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(this.auth, provider);
+    this.auth.login();
   }
   ngOnInit() {}
 }
