@@ -1,17 +1,29 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, GoogleAuthProvider } from '@angular/fire/auth';
-import { User, onAuthStateChanged, signInWithRedirect } from 'firebase/auth';
+import { Auth, GoogleAuthProvider, signInWithRedirect, setPersistence, browserLocalPersistence } from '@angular/fire/auth';
+import { User, onAuthStateChanged, signOut } from 'firebase/auth';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private auth: Auth = inject(Auth);
-  user: User | null = null; 
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$: Observable<User | null> = this.userSubject.asObservable();
 
   constructor() {
-    onAuthStateChanged(this.auth, (user) => {
-      this.user = user;
+    console.log('Initializing AuthService...');
+    
+    // Set authentication persistence
+    setPersistence(this.auth, browserLocalPersistence).then(() => {
+      onAuthStateChanged(this.auth, (user) => {
+        console.log('Auth state changed:', user);
+        this.userSubject.next(user);
+      }, (error) => {
+        console.error('Error in onAuthStateChanged:', error);
+      });
+    }).catch((error) => {
+      console.error('Error setting persistence:', error);
     });
   }
   
@@ -21,11 +33,11 @@ export class AuthService {
   }
 
   logout() {
-    this.auth.signOut();
+    signOut(this.auth);
   }
   
   // logUser(event: Event) {
   //   event.preventDefault(); // Prevent the default action
-  //   console.log(`UserObj is the one: ${this.user?.displayName} None`);
- // } 
+  //   console.log(`UserObj is the one: ${this.userSubject.value?.displayName || 'None'}`);
+  // }
 }

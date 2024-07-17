@@ -1,3 +1,4 @@
+import { AuthGuardService } from './auth-guard.service';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
@@ -6,6 +7,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { LoginComponent } from './login/login.component';
 import { CheckOutComponent } from './check-out/check-out.component';
+import { OrderSuccessComponent } from './order-success/order-success.component';
 
 const routeConfig: Routes = [
     {
@@ -22,16 +24,19 @@ const routeConfig: Routes = [
         path: 'my/orders',
         component: MyOrdersComponent,
         title: 'My Orders',
+        canActivate: [AuthGuardService]
     },
     {
         path: 'admin/orders',
         component: AdminOrdersComponent,
         title: 'Manage Orders',
+        canActivate: [AuthGuardService]
     },
     {
         path: 'admin/products',
         component: AdminProductsComponent,
         title: 'My Orders',
+        canActivate: [AuthGuardService]
     },
     {
         path: 'login',
@@ -42,6 +47,13 @@ const routeConfig: Routes = [
         path: 'check-out',
         component: CheckOutComponent,
         title: 'Checkout',
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'order-success',
+        component: OrderSuccessComponent,
+        title: 'Order Success',
+        canActivate: [AuthGuardService]
     }
 ];
 

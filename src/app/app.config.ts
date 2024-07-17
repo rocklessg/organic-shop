@@ -5,6 +5,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import routeConfig from './app.routes';
 import { AuthService } from './auth.service';
+import { AuthGuardService } from './auth-guard.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +20,8 @@ export const appConfig: ApplicationConfig = {
       messagingSenderId: "137383402011"
     })),
     provideAuth(() => getAuth()),
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   
 };
